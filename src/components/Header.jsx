@@ -1,6 +1,6 @@
 function Header() {
     return (
-        <header className="flex bg-[#020203] text-[#FFFFFF]">
+        <header className="flex bg-[#020203] text-[#FFFFFF] shadow-lg shadow-black/25">
             <img src="../src/assets/logo.png" alt="Logo SportSee" className="my-5 mx-7"/>
             <nav className="w-full content-center"> 
                 <ul className="flex justify-around text-2xl">
