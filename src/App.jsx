@@ -7,25 +7,25 @@ import NutrientCard from './components/NutrientCard'
 function App() {
 
   return (
-    <div className='font-[Roboto]'>
+    <div className='font-[Roboto] min-w-5xl'>
       <Header />
       <div className='flex'>
         <Sidebar /> 
 
-        <div className='w-full m-20 flex flex-col gap-10'>
+        <div className='w-full my-10 mx-4 flex flex-col gap-10'>
           <div>
             <Hero name="Thomas" />
           </div>
 
-          <div className='flex gap-6'>
-            <div className='w-[70%] h-full grid grid-cols-3 gap-6'>
+          <div className='flex gap-2'>
+            <div className='w-[76%] h-full grid grid-cols-3 gap-2'>
               <div className='bg-[#FBFBFB] col-span-3'>1</div>
               <div className='bg-[#FBFBFB]'>2</div>
               <div className='bg-[#FBFBFB]'>3</div>
               <div className='bg-[#FBFBFB]'>4</div>
             </div>
 
-            <div className='w-[30%] flex flex-col gap-6'>
+            <div className='w-[24%] flex flex-col gap-2'>
               <NutrientCard
                 icon="energy"
                 name="Calories"
