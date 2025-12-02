@@ -1,11 +1,10 @@
-// import { useState } from 'react';
 import data from '../data/data.json';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Text, Rectangle } from 'recharts';
 
-const CustomCursor = ({points, width}) => {// `height` correspond à la hauteur totale du conteneur
+const CustomCursor = ({points, width}) => {
     if (!points || points.length === 0) return null;
 
-    const { x } = points[0]; // On utilise uniquement `x` pour la position horizontale
+    const { x } = points[0]; // position horizontale
     return (
         <Rectangle
             fill="#000000"
@@ -13,14 +12,12 @@ const CustomCursor = ({points, width}) => {// `height` correspond à la hauteur 
             x={x}
             y={0} // Le rectangle commence tout en haut
             width={width}
-            height={214} // Le rectangle prend toute la hauteur du conteneur
+            height={214}
         />
     );
 };
 
 function SessionDurationChart() {
-    // const [activeIndex, setActiveIndex] = useState(null);
-
     const userId = 12; // ID de l'utilisateur
     const userAverageSessions = data.USER_AVERAGE_SESSIONS.find(sessions => sessions.userId === userId);
     const extendedSessions = [
