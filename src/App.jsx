@@ -5,6 +5,7 @@ import Sidebar from './components/Sidebar'
 import Hero from './components/Hero'
 import NutrientCard from './components/NutrientCard'
 import DailyActivityChart from './components/DailyActivityChart'
+import SessionDurationChart from './components/SessionDurationChart'
 
 function App() {
   let userID = 12;
@@ -23,20 +24,20 @@ function App() {
 
           <div className='flex gap-2 max-h-[600px]'>
             <div className='w-[76%] grid grid-cols-3 gap-2'>
-              <div className='bg-[#FBFBFB] col-span-3 flex justify-center items-center h-[270px]'>
+              <div className='bg-[#FBFBFB] col-span-3 flex justify-center items-center h-[270px] rounded-md'>
                 <DailyActivityChart />
               </div>
 
-              <div className='bg-[#FBFBFB] h-[214px]'>
-                2
+              <div className='bg-[#FF0000] h-[214px] rounded-md relative'>
+                <SessionDurationChart />
               </div>
 
-              <div className='bg-[#FBFBFB] h-[214px]'>
-                3
+              <div className='bg-[#FBFBFB] h-[214px] rounded-md'>
+                
               </div>
 
-              <div className='bg-[#FBFBFB] h-[214px]'>
-                4
+              <div className='bg-[#FBFBFB] h-[214px] rounded-md'>
+                
               </div>
             </div>
 
