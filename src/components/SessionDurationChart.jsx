@@ -1,9 +1,25 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 import data from '../data/data.json';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Text, ReferenceArea } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Text, Rectangle } from 'recharts';
+
+const CustomCursor = ({points, width}) => {// `height` correspond à la hauteur totale du conteneur
+    if (!points || points.length === 0) return null;
+
+    const { x } = points[0]; // On utilise uniquement `x` pour la position horizontale
+    return (
+        <Rectangle
+            fill="#000000"
+            opacity={0.09}
+            x={x}
+            y={0} // Le rectangle commence tout en haut
+            width={width}
+            height={214} // Le rectangle prend toute la hauteur du conteneur
+        />
+    );
+};
 
 function SessionDurationChart() {
-    const [activeIndex, setActiveIndex] = useState(null);
+    // const [activeIndex, setActiveIndex] = useState(null);
 
     const userId = 12; // ID de l'utilisateur
     const userAverageSessions = data.USER_AVERAGE_SESSIONS.find(sessions => sessions.userId === userId);
@@ -17,7 +33,7 @@ function SessionDurationChart() {
 
     return (
         <LineChart
-            style={{ position: 'absolute', bottom: 0, width: '100%', height: '100%', aspectRatio: 1.618 }}
+            style={{ position: 'absolute', bottom: 0, width: '100%', height: '100%' }}
             responsive
             data={extendedSessions}
             margin={{
@@ -26,12 +42,6 @@ function SessionDurationChart() {
                 left: 0,
                 bottom: 15,
             }}
-            onMouseMove={(e) => {
-                if (e && e.activeTooltipIndex !== undefined) {
-                    setActiveIndex(e.activeTooltipIndex); // Met à jour l'index actif
-                }
-            }}
-            onMouseLeave={() => setActiveIndex(null)} // Réinitialise l'état lorsque la souris quitte le graphique
         >
             <Text
                 x={20}
@@ -48,7 +58,7 @@ function SessionDurationChart() {
             </Text>
 
             <CartesianGrid 
-                style={{ width: '100%', height: '70%'}}
+                style={{ width: '100%', height: '100%'}}
                 horizontal={false}
                 vertical={false}
             />
@@ -72,11 +82,10 @@ function SessionDurationChart() {
                 itemStyle = {{color: '#000000', fontSize: 7}}
                 contentStyle ={{backgroundColor: '#FFFFFF', border: 'none'}}
                 labelStyle={{display: 'none'}}
-                cursor = {false}
                 formatter={(value) => {
                     return [`${value} min`];
                 }}
-                
+                cursor={<CustomCursor />}
             />
 
             <defs>
@@ -94,19 +103,6 @@ function SessionDurationChart() {
                 dot={false}
                 activeDot={{ fill: '#FFFFFF', stroke: 'rgba(255, 255, 255, 0.2)', strokeWidth: 10 }}
             />
-
-            {activeIndex !== null && extendedSessions[activeIndex] && (
-                <>
-                    <ReferenceArea
-                        x1={extendedSessions[activeIndex]?.day} // Position du curseur
-                        x2={8} // Dernier jour
-                        y1={0}
-                        y2="auto"
-                        fill="rgba(0, 0, 0, 0.0975)" 
-                        strokeOpacity={0}
-                    />
-                </>
-            )}
         </LineChart>
     )
 }

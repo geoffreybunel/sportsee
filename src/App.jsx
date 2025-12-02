@@ -28,7 +28,7 @@ function App() {
                 <DailyActivityChart />
               </div>
 
-              <div className='bg-[#FF0000] h-[214px] rounded-md relative'>
+              <div className='bg-[#FF0000] max-h-[214px] h-full rounded-md relative'>
                 <SessionDurationChart />
               </div>
 
