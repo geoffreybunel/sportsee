@@ -7,6 +7,7 @@ import NutrientCard from './components/NutrientCard'
 import DailyActivityChart from './components/DailyActivityChart'
 import SessionDurationChart from './components/SessionDurationChart'
 import PerformanceChart from './components/PerformanceChart'
+import ScoreChart from './components/ScoreChart'
 
 function App() {
   let userID = 12;
@@ -37,8 +38,8 @@ function App() {
                 <PerformanceChart />
               </div>
 
-              <div className='bg-[#FBFBFB] h-[214px] rounded-md'>
-                
+              <div className='bg-[#FBFBFB] h-[214px] rounded-md relative'>
+                <ScoreChart />
               </div>
             </div>
 
