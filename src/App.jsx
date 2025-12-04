@@ -19,7 +19,7 @@ function App() {
       <div className='flex'>
         <Sidebar /> 
 
-        <div className='w-full my-10 mx-4 flex flex-col gap-10'>
+        <div className='w-full my-15 mx-4 flex flex-col gap-15'>
           <div>
             <Hero name={user.userInfos.firstName} />
           </div>
@@ -43,7 +43,7 @@ function App() {
               </div>
             </div>
 
-            <div className='w-[24%] flex flex-col gap-2'>
+            <div className='w-[24%] h-full flex flex-col gap-2'>
               <NutrientCard
                 icon="energy"
                 name="Calories"
