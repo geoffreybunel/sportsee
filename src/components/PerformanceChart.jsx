@@ -1,8 +1,10 @@
 import data from '../data/data.json';
+import { useContext } from 'react';
+import { UserContext } from '../utils/UserContext';
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Tooltip } from 'recharts';
 
-function PerformanceChart({id}) {
-    const userId = id;
+function PerformanceChart() {
+    const userId = useContext(UserContext);
     const userPerformance = data.USER_PERFORMANCE.find(performance => performance.userId === userId);
 
     // Transforme l'objet en tableau exploitable par RadarChart

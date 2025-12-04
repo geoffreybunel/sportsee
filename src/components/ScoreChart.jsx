@@ -1,8 +1,10 @@
 import data from '../data/data.json';
+import { useContext } from 'react';
+import { UserContext } from '../utils/UserContext';
 import { Pie, PieChart, Text, Legend } from 'recharts';
 
-function ScoreChart({id}) {
-    const userId = id;
+function ScoreChart() {
+    const userId = useContext(UserContext);
     const user = data.USER_MAIN_DATA.find(u => u.id === userId);
 
     // Récupère le score

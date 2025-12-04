@@ -1,8 +1,10 @@
 import data from '../data/data.json';
+import { useContext } from 'react';
+import { UserContext } from '../utils/UserContext';
 import { BarChart, Bar, Text, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
-function DailyActivityChart({id}) {
-    const userId = id;
+function DailyActivityChart() {
+    const userId = useContext(UserContext);
     const userActivity = data.USER_ACTIVITY.find(activity => activity.userId === userId);
 
     return (
