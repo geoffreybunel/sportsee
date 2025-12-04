@@ -2,7 +2,7 @@ import data from '../data/data.json';
 import { Pie, PieChart, Text, Legend } from 'recharts';
 
 function ScoreChart() {
-    const userId = 18; // ID de l'utilisateur
+    const userId = 12; // ID de l'utilisateur
     const user = data.USER_MAIN_DATA.find(u => u.id === userId);
 
     // Récupère le score
