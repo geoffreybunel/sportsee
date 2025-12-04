@@ -9,8 +9,8 @@ import SessionDurationChart from './components/SessionDurationChart'
 import PerformanceChart from './components/PerformanceChart'
 import ScoreChart from './components/ScoreChart'
 
-function App() {
-  let userID = 12;
+function App({id}) {
+  const userID = id;
   const user = data.USER_MAIN_DATA.find(user => user.id === userID)
 
   return (
@@ -27,19 +27,19 @@ function App() {
           <div className='flex gap-2 max-h-[600px]'>
             <div className='w-[76%] grid grid-cols-3 gap-2'>
               <div className='bg-[#FBFBFB] col-span-3 flex justify-center items-center h-[270px] rounded-md'>
-                <DailyActivityChart />
+                <DailyActivityChart id={userID} />
               </div>
 
               <div className='bg-[#FF0000] max-h-[214px] h-full rounded-md relative'>
-                <SessionDurationChart />
+                <SessionDurationChart id={userID} />
               </div>
 
               <div className='bg-[#282D30] h-[214px] rounded-md'>
-                <PerformanceChart />
+                <PerformanceChart id={userID} />
               </div>
 
               <div className='bg-[#FBFBFB] h-[214px] rounded-md relative'>
-                <ScoreChart />
+                <ScoreChart id={userID} />
               </div>
             </div>
 

@@ -17,8 +17,8 @@ const CustomCursor = ({points, width}) => {
     );
 };
 
-function SessionDurationChart() {
-    const userId = 12; // ID de l'utilisateur
+function SessionDurationChart({id}) {
+    const userId = id;
     const userAverageSessions = data.USER_AVERAGE_SESSIONS.find(sessions => sessions.userId === userId);
     const extendedSessions = [
         { day: 0, sessionLength: 25 },

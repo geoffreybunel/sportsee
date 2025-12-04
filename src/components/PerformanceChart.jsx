@@ -1,8 +1,8 @@
 import data from '../data/data.json';
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Tooltip } from 'recharts';
 
-function PerformanceChart() {
-    const userId = 12; // ID de l'utilisateur
+function PerformanceChart({id}) {
+    const userId = id;
     const userPerformance = data.USER_PERFORMANCE.find(performance => performance.userId === userId);
 
     // Transforme l'objet en tableau exploitable par RadarChart

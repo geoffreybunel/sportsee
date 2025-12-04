@@ -1,12 +1,8 @@
 import data from '../data/data.json';
 import { BarChart, Bar, Text, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
-function DailyActivityChart() {
-    // SessionDurationChart
-    // PerformanceChart
-    // ScoreChart
-
-    const userId = 12; // ID de l'utilisateur
+function DailyActivityChart({id}) {
+    const userId = id;
     const userActivity = data.USER_ACTIVITY.find(activity => activity.userId === userId);
 
     return (
