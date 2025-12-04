@@ -29,19 +29,19 @@ function App({id}) {
             <div className='flex gap-2 max-h-[600px]'>
               <div className='w-[76%] grid grid-cols-3 gap-2'>
                 <div className='bg-[#FBFBFB] col-span-3 flex justify-center items-center h-[270px] rounded-md'>
-                  <DailyActivityChart id={userID} />
+                  <DailyActivityChart/>
                 </div>
 
                 <div className='bg-[#FF0000] max-h-[214px] h-full rounded-md relative'>
-                  <SessionDurationChart id={userID} />
+                  <SessionDurationChart/>
                 </div>
 
                 <div className='bg-[#282D30] h-[214px] rounded-md'>
-                  <PerformanceChart id={userID} />
+                  <PerformanceChart/>
                 </div>
 
                 <div className='bg-[#FBFBFB] h-[214px] rounded-md relative'>
-                  <ScoreChart id={userID} />
+                  <ScoreChart/>
                 </div>
               </div>
 
