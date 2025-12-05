@@ -5,21 +5,37 @@ import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Tooltip 
 
 function PerformanceChart() {
     const userId = useContext(UserContext);
-    const userPerformance = data.USER_PERFORMANCE.find(performance => performance.userId === userId);
+    const userPerformance = data.USER_PERFORMANCE.find(p => p.userId === userId);
 
     // Transforme l'objet en tableau exploitable par RadarChart
-    const kind = userPerformance?.kind || {};
-    const performanceData = (userPerformance?.data || []).map(d => ({
-        subject: kind[String(d.kind)], // "1" -> "cardio", etc.
-        value: d.value,
-    }));
+    const kind = userPerformance.kind;
+    const kindTranslation = {
+        intensity: "Intensité",
+        speed: "Vitesse",
+        strength: "Force",
+        endurance: "Endurance",
+        energy: "Énergie",
+        cardio: "Cardio"
+    };
+
+    const performanceData = userPerformance.data.map(d => {
+        const subjectEn = kind[String(d.kind)];
+        return {
+          subject: kindTranslation[subjectEn] || subjectEn, // traduit ou garde l'original
+          value: d.value,
+        };
+      });
+    const desiredOrder = ["Intensité", "Vitesse", "Force", "Endurance", "Énergie", "Cardio"];
+    const orderedPerformanceData = performanceData.sort(
+        (a, b) => desiredOrder.indexOf(a.subject) - desiredOrder.indexOf(b.subject)
+    );
 
     return (
         <RadarChart
             style={{ width: '100%', height: '100%', maxWidth: '500px', maxHeight: '80vh', aspectRatio: 1 }}
             responsive
             outerRadius="80%"
-            data={performanceData}
+            data={orderedPerformanceData}
             margin={{
                 top: 17,
                 left: 17,
