@@ -8,7 +8,7 @@ function ScoreChart() {
     const user = data.USER_MAIN_DATA.find(u => u.id === userId);
 
     // Récupère le score
-    const userScore = user.todayScore;
+    const userScore = user.todayScore ?? user.score;
 
     // Prépare les données pour le PieChart
     const userScoreArray = [
