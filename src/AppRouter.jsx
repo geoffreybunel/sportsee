@@ -11,6 +11,7 @@ function AppRouter() {
     return (
         <BrowserRouter>
         <Routes>
+          <Route path="/" element={<div>Aucun utilisateur sélectionné ou utilisateur inconnu</div>} />
           <Route path="/:id" element={<App />} />
         </Routes>
       </BrowserRouter>

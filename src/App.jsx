@@ -14,7 +14,13 @@ import ScoreChart from './components/ScoreChart'
 function App() {
   const { id } = useParams(); // récupère l'id depuis l'URL
   const userID = Number(id);
+  const validIds = [12, 18];
   const user = data.USER_MAIN_DATA.find(user => user.id === userID)
+
+  // Si pas d'id OU id non valide OU user non trouvé
+  if (!id || !validIds.includes(userID) || !user) {
+    return <div>Aucun utilisateur sélectionné ou utilisateur inconnu</div>;
+  }
 
   return (
     <UserProvider userId={userID}>
