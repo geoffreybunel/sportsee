@@ -1,0 +1,20 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import App from './App';
+
+<BrowserRouter>
+  <Routes>
+    <Route path="/user/:id" element={<App />} />
+  </Routes>
+</BrowserRouter>
+
+function AppRouter() {
+    return (
+        <BrowserRouter>
+        <Routes>
+          <Route path="/:id" element={<App />} />
+        </Routes>
+      </BrowserRouter>
+    )
+  }
+  
+  export default AppRouter

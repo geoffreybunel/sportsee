@@ -1,6 +1,7 @@
 import './App.css'
 import data from './data/data.json'
 import { UserProvider } from './utils/UserProvider'
+import { useParams } from 'react-router-dom';
 import Header from './components/Header'
 import Sidebar from './components/Sidebar'
 import Hero from './components/Hero'
@@ -10,12 +11,13 @@ import SessionDurationChart from './components/SessionDurationChart'
 import PerformanceChart from './components/PerformanceChart'
 import ScoreChart from './components/ScoreChart'
 
-function App({id}) {
-  const userID = id;
+function App() {
+  const { id } = useParams(); // récupère l'id depuis l'URL
+  const userID = Number(id);
   const user = data.USER_MAIN_DATA.find(user => user.id === userID)
 
   return (
-    <UserProvider userId={id}>
+    <UserProvider userId={userID}>
       <div className='font-[Roboto] min-w-5xl'>
         <Header />
         <div className='flex'>
