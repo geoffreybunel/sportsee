@@ -37,10 +37,10 @@ function PerformanceChart() {
             outerRadius="80%"
             data={orderedPerformanceData}
             margin={{
-                top: 17,
-                left: 17,
-                right: 17,
-                bottom: 17,
+                top: 20,
+                left: 20,
+                right: 20,
+                bottom: 20,
             }}
         >
             <PolarGrid 
@@ -52,7 +52,7 @@ function PerformanceChart() {
                 dataKey="subject" 
                 tick={{
                     fill: "#FFFFFF",
-                    fontSize: 12,
+                    fontSize: 11,
                     fontWeight: 500,
                 }}
             />

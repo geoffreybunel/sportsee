@@ -49,7 +49,7 @@ function ScoreChart() {
 
             <Legend
                 content={() => (
-                    <div className='absolute max-w-20 flex flex-col items-center -top-38 left-17'>
+                    <div className='absolute max-w-20 flex flex-col items-center -top-36 left-15'>
                         <span className='text-[#282D30] text-[26px] font-bold'>{`${userScore * 100}%`}</span>
                         <span className='text-[#74798C] text-[16px] font-medium text-center'>de votre objectif</span>
                     </div>

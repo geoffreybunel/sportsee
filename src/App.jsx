@@ -1,4 +1,3 @@
-import './App.css'
 import data from './data/data.json'
 import { UserProvider } from './utils/UserProvider'
 import { useParams } from 'react-router-dom';
@@ -26,10 +25,10 @@ function App() {
     <UserProvider userId={userID}>
       <div className='font-[Roboto] min-w-5xl'>
         <Header />
-        <div className='flex'>
+        <div className='flex min-w-5xl'>
           <Sidebar /> 
 
-          <div className='w-full my-15 mx-4 flex flex-col gap-15'>
+          <div className='w-full my-15 mx-[max(24px,min(100px,(100vw-1024px)/2))] flex flex-col gap-15'>
             <div>
               <Hero name={user.userInfos.firstName} />
             </div>
