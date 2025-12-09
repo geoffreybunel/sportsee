@@ -17,45 +17,51 @@ function ScoreChart() {
     ];
 
     return (
-        <PieChart style={{ width: '100%', maxWidth: '500px', maxHeight: '80vh', aspectRatio: 1 }} responsive>
-            <circle
-                cx="50%"
-                cy="50%"
-                r="30%"
-                fill="#FFFFFF"
-            />
+        <>
+            <PieChart style={{ width: '100%', maxWidth: '500px', maxHeight: '100vh', aspectRatio: 1 }} responsive>
+                <circle
+                    cx="50%"
+                    cy="50%"
+                    r="30%"
+                    fill="#FFFFFF"
+                />
 
-            <Text
-                x={30}
-                y={20}
-                fill='#20253A'
-                fontSize={15}
-                fontWeight={500}
-                textAnchor='start'
-                verticalAnchor='start'
+                <Text
+                    x={30}
+                    y={20}
+                    fill='#20253A'
+                    fontSize={15}
+                    fontWeight={500}
+                    textAnchor='start'
+                    verticalAnchor='start'
+                >
+                    Score
+                </Text>
+
+                <Pie
+                    data={userScoreArray}
+                    innerRadius="60%"
+                    outerRadius="70%"
+                    cornerRadius="50%"
+                    startAngle={90}
+                    endAngle={450}
+                    stroke='none'
+                />
+            </PieChart>
+
+            {/* Legend */}
+            <div
+            className="absolute max-w-20 flex flex-col items-center justify-center"
+            style={{
+                top: '48%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+            }}
             >
-                Score
-            </Text>
-
-            <Pie
-                data={userScoreArray}
-                innerRadius="60%"
-                outerRadius="70%"
-                cornerRadius="50%"
-                startAngle={90}
-                endAngle={450}
-                stroke='none'
-            />
-
-            <Legend
-                content={() => (
-                    <div className='absolute max-w-20 flex flex-col items-center -top-36 left-15'>
-                        <span className='text-[#282D30] text-[26px] font-bold'>{`${userScore * 100}%`}</span>
-                        <span className='text-[#74798C] text-[16px] font-medium text-center'>de votre objectif</span>
-                    </div>
-                )}
-            />
-        </PieChart>
+                <span className='text-[#282D30] text-[26px] font-bold'>{`${userScore * 100}%`}</span>
+                <span className='text-[#74798C] text-[16px] font-medium text-center'>de votre objectif</span>
+            </div>
+        </>
     )
 }
 export default ScoreChart
