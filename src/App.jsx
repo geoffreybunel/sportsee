@@ -35,19 +35,19 @@ function App() {
 
             <div className='flex gap-2 max-h-[600px]'>
               <div className='w-[76%] grid grid-cols-3 gap-2'>
-                <div className='bg-[#FBFBFB] col-span-3 flex justify-center items-center h-[270px] rounded-md'>
+                <div className='bg-[#FBFBFB] col-span-3 flex justify-center items-center h-[270px] xl:h-80 rounded-md'>
                   <DailyActivityChart/>
                 </div>
 
-                <div className='bg-[#FF0000] max-h-[214px] h-full rounded-md relative'>
+                <div className='bg-[#FF0000] h-full xl:h-65 rounded-md relative'>
                   <SessionDurationChart/>
                 </div>
 
-                <div className='bg-[#282D30] h-[214px] rounded-md'>
+                <div className='bg-[#282D30] h-[214px] xl:h-65 rounded-md'>
                   <PerformanceChart/>
                 </div>
 
-                <div className='bg-[#FBFBFB] h-[214px] rounded-md relative'>
+                <div className='bg-[#FBFBFB] h-[214px] xl:h-65 rounded-md relative'>
                   <ScoreChart/>
                 </div>
               </div>

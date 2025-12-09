@@ -1,20 +1,33 @@
 import data from '../data/data.json';
+import { useEffect, useState } from "react";
 import { useContext } from 'react';
 import { UserContext } from '../utils/UserContext';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Text, Rectangle } from 'recharts';
 
 const CustomCursor = ({points, width}) => {
+    const [rectHeight, setRectHeight] = useState(214);
+
+    useEffect(() => {
+      function handleResize() {
+        setRectHeight(window.innerWidth >= 1280 ? 260 : 214);
+      }
+      handleResize();
+      window.addEventListener("resize", handleResize);
+      return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
     if (!points || points.length === 0) return null;
 
     const { x } = points[0]; // position horizontale
     return (
         <Rectangle
+            className="h-[214px] xl:h-[260px]"
             fill="#000000"
             opacity={0.09}
             x={x}
-            y={0} // Le rectangle commence tout en haut
+            y={0}
             width={width}
-            height={214}
+            height={rectHeight}
         />
     );
 };
