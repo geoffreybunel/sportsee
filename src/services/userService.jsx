@@ -22,6 +22,10 @@ export async function getUser(id) {
         // use mock
         console.log('Données récupérées depuis le mock pour l’utilisateur', id);
         const user = mockData.USER_MAIN_DATA.find(u => u.id === Number(id));
+        if (!user) {
+            console.error(`Utilisateur avec l'ID ${id} introuvable dans les données mockées.`);
+            return null; // Retourne null si aucune donnée n'est trouvée
+        }
         return formatUserData(user);
     }
 }
@@ -36,7 +40,11 @@ export async function getUserActivity(id) {
     } catch {
         // use mock
         console.log('Données récupérées depuis le mock pour l’utilisateur', id);
-        const user = mockData.USER_ACTIVITY.find(u => u.id === Number(id));
+        const user = mockData.USER_ACTIVITY.find(u => u.userId === Number(id));
+        if (!user) {
+            console.error(`Utilisateur avec l'ID ${id} introuvable dans les données mockées.`);
+            return null; // Retourne null si aucune donnée n'est trouvée
+        }
         return user.sessions;
     }
 }
@@ -51,7 +59,11 @@ export async function getUserAverageSessions(id) {
     } catch {
         // use mock
         console.log('Données récupérées depuis le mock pour l’utilisateur', id);
-        const user = mockData.USER_AVERAGE_SESSIONS.find(u => u.id === Number(id));
+        const user = mockData.USER_AVERAGE_SESSIONS.find(u => u.userId === Number(id));
+        if (!user) {
+            console.error(`Utilisateur avec l'ID ${id} introuvable dans les données mockées.`);
+            return null; // Retourne null si aucune donnée n'est trouvée
+        }
         return user.sessions;
     }
 
@@ -67,7 +79,13 @@ export async function getUserPerformance(id) {
     } catch {
         // use mock
         console.log('Données récupérées depuis le mock pour l’utilisateur', id);
-        const user = mockData.USER_PERFORMANCE.find(u => u.id === Number(id));
+        const user = mockData.USER_PERFORMANCE.find(u => u.userId === Number(id));
+        // console.log('Utilisateur trouvé dans le mock :', user);
+        if (!user) {
+            console.error(`Utilisateur avec l'ID ${id} introuvable dans les données mockées.`);
+            return null; // Retourne null si aucune donnée n'est trouvée
+        }
+        // console.log('Données trouvées dans le mock :', user.data);
         return user.data;
     }
 

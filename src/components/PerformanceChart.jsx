@@ -1,24 +1,46 @@
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis } from 'recharts';
 
 function PerformanceChart({ data }) {
-    // Transforme l'objet en tableau exploitable par RadarChart
-    const kind = data.kind;
-    const kindTranslation = {
-        intensity: "Intensité",
-        speed: "Vitesse",
-        strength: "Force",
-        endurance: "Endurance",
-        energy: "Énergie",
-        cardio: "Cardio"
-    };
+    // console.log('Données reçues par PerformanceChart :', data);
+    
+    // Vérifie si les données sont valides
+    if (!data || (!Array.isArray(data) && (!data.data || !data.kind))) {
+        return <div>Les données de performance sont introuvables.</div>;
+    }
 
-    const performanceData = data.data.map(d => {
-        const subjectEn = kind[String(d.kind)];
-        return {
-          subject: kindTranslation[subjectEn] || subjectEn, // traduit ou garde l'original
-          value: d.value,
-        };
-      });
+    // Traduction des types de performance
+    const kindTranslation = {
+        1: "Cardio",
+        2: "Énergie",
+        3: "Endurance",
+        4: "Force",
+        5: "Vitesse",
+        6: "Intensité",
+        cardio: "Cardio",
+        energy: "Énergie",
+        endurance: "Endurance",
+        strength: "Force",
+        speed: "Vitesse",
+        intensity: "Intensité"
+    };
+    
+    // Transforme les données pour le RadarChart
+    let performanceData;
+    if (data.kind) {
+        // Cas où les données proviennent de l'API
+        performanceData = data.data.map(d => ({
+            subject: kindTranslation[data.kind[d.kind]] || `Type ${d.kind}`,
+            value: d.value,
+        }));
+    } else {
+        // Cas où les données proviennent du mock
+        performanceData = data.map(d => ({
+            subject: kindTranslation[d.kind] || `Type ${d.kind}`,
+            value: d.value,
+        }));
+    }
+
+    // Ordre souhaité des types de performance
     const desiredOrder = ["Intensité", "Vitesse", "Force", "Endurance", "Énergie", "Cardio"];
     const orderedPerformanceData = performanceData.sort(
         (a, b) => desiredOrder.indexOf(a.subject) - desiredOrder.indexOf(b.subject)

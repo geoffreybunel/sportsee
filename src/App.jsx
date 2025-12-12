@@ -21,30 +21,25 @@ function App() {
   const [averageSessions, setAverageSessions] = useState([]);
   const [performance, setPerformance] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
     async function fetchData() {
-      try {
-        setLoading(true);
-        setError(null);
+      setLoading(true);
 
-        // Appels API
-        const userData = await getUser(userID);
-        const userActivity = await getUserActivity(userID);
-        const userAverageSessions = await getUserAverageSessions(userID);
-        const userPerformance = await getUserPerformance(userID);
+      // Appels API ou fallback mock
+      const userData = await getUser(userID);
+      const userActivity = await getUserActivity(userID);
+      const userAverageSessions = await getUserAverageSessions(userID);
+      const userPerformance = await getUserPerformance(userID);
 
-        // Mise à jour des états
-        setUser(userData);
-        setActivity(userActivity);
-        setAverageSessions(userAverageSessions);
-        setPerformance(userPerformance);
-      } catch {
-        setError('Impossible de charger les données utilisateur.');
-      } finally {
-        setLoading(false);
-      }
+      // console.log('Données de performance récupérées :', userPerformance);
+      // Mise à jour des états
+      setUser(userData);
+      setActivity(userActivity);
+      setAverageSessions(userAverageSessions);
+      setPerformance(userPerformance);
+
+      setLoading(false);
     }
 
     fetchData();
@@ -55,8 +50,15 @@ function App() {
     return <div>Aucun utilisateur sélectionné ou utilisateur inconnu</div>;
   }
 
-  if (loading) return <div>Chargement...</div>;
-  if (error) return <div>{error}</div>;
+  // Affiche un message de chargement
+  if (loading) {
+    return <div>Chargement des données...</div>;
+  }
+
+  // Vérifie si `user` est défini avant de l'utiliser
+  if (!user) {
+    return <div>Les données utilisateur sont introuvables.</div>;
+  }
 
   return (
     <UserProvider userId={userID}>
