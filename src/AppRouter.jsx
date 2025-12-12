@@ -12,7 +12,7 @@ function AppRouter() {
         <BrowserRouter>
         <Routes>
           <Route path="/" element={<div>Aucun utilisateur sélectionné ou utilisateur inconnu</div>} />
-          <Route path="/:id" element={<App />} />
+          <Route path="/user/:id" element={<App />} />
         </Routes>
       </BrowserRouter>
     )
