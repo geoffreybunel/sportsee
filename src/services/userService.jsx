@@ -16,9 +16,11 @@ export async function getUser(id) {
         const response = await fetch(`${API_URL}/${id}`);
         if (!response.ok) throw new Error('API error');
         const data = await response.json();
+        console.log('Données récupérées depuis l’API pour l’utilisateur', id);
         return formatUserData(data.data)
     } catch {
         // use mock
+        console.log('Données récupérées depuis le mock pour l’utilisateur', id);
         const user = mockData.USER_MAIN_DATA.find(u => u.id === Number(id));
         return formatUserData(user);
     }
@@ -28,10 +30,12 @@ export async function getUserActivity(id) {
     try {
         const response = await fetch(`${API_URL}/${id}/activity`);
         if (!response.ok) throw new Error('API error');
+        console.log('Données récupérées depuis l’API pour l’utilisateur', id);
         const data = await response.json();
         return data.data.sessions;
     } catch {
         // use mock
+        console.log('Données récupérées depuis le mock pour l’utilisateur', id);
         const user = mockData.USER_ACTIVITY.find(u => u.id === Number(id));
         return user.sessions;
     }
@@ -41,10 +45,12 @@ export async function getUserAverageSessions(id) {
     try {
         const response = await fetch(`${API_URL}/${id}/average-sessions`);
         if (!response.ok) throw new Error('API error');
+        console.log('Données récupérées depuis l’API pour l’utilisateur', id);
         const data = await response.json();
         return data.data.sessions;
     } catch {
         // use mock
+        console.log('Données récupérées depuis le mock pour l’utilisateur', id);
         const user = mockData.USER_AVERAGE_SESSIONS.find(u => u.id === Number(id));
         return user.sessions;
     }
@@ -55,10 +61,12 @@ export async function getUserPerformance(id) {
     try {
         const response = await fetch(`${API_URL}/${id}/performance`);
         if (!response.ok) throw new Error('API error');
+        console.log('Données récupérées depuis l’API pour l’utilisateur', id);
         const data = await response.json();
         return data.data;
     } catch {
         // use mock
+        console.log('Données récupérées depuis le mock pour l’utilisateur', id);
         const user = mockData.USER_PERFORMANCE.find(u => u.id === Number(id));
         return user.data;
     }
