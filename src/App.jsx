@@ -1,4 +1,5 @@
-import data from './data/data.json'
+import { useEffect, useState } from 'react';
+import { getUser, getUserActivity, getUserAverageSessions, getUserPerformance } from './services/userService';
 import { UserProvider } from './utils/UserProvider'
 import { useParams } from 'react-router-dom';
 import Header from './components/Header'
@@ -14,12 +15,48 @@ function App() {
   const { id } = useParams(); // récupère l'id depuis l'URL
   const userID = Number(id);
   const validIds = [12, 18];
-  const user = data.USER_MAIN_DATA.find(user => user.id === userID)
+
+  const [user, setUser] = useState(null);
+  const [activity, setActivity] = useState([]);
+  const [averageSessions, setAverageSessions] = useState([]);
+  const [performance, setPerformance] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        setLoading(true);
+        setError(null);
+
+        // Appels API
+        const userData = await getUser(userID);
+        const userActivity = await getUserActivity(userID);
+        const userAverageSessions = await getUserAverageSessions(userID);
+        const userPerformance = await getUserPerformance(userID);
+
+        // Mise à jour des états
+        setUser(userData);
+        setActivity(userActivity);
+        setAverageSessions(userAverageSessions);
+        setPerformance(userPerformance);
+      } catch {
+        setError('Impossible de charger les données utilisateur.');
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchData();
+  }, [userID]);
 
   // Si pas d'id OU id non valide OU user non trouvé
-  if (!id || !validIds.includes(userID) || !user) {
+  if (!id || !validIds.includes(userID)) {
     return <div>Aucun utilisateur sélectionné ou utilisateur inconnu</div>;
   }
+
+  if (loading) return <div>Chargement...</div>;
+  if (error) return <div>{error}</div>;
 
   return (
     <UserProvider userId={userID}>
@@ -36,19 +73,19 @@ function App() {
             <div className='flex gap-2 max-h-[600px]'>
               <div className='w-[76%] grid grid-cols-3 gap-2'>
                 <div className='bg-[#FBFBFB] col-span-3 flex justify-center items-center h-[270px] xl:h-80 rounded-md'>
-                  <DailyActivityChart/>
+                  <DailyActivityChart data={activity}/>
                 </div>
 
                 <div className='bg-[#FF0000] h-full xl:h-65 rounded-md relative'>
-                  <SessionDurationChart/>
+                  <SessionDurationChart data={averageSessions}/>
                 </div>
 
                 <div className='bg-[#282D30] h-[214px] xl:h-65 rounded-md'>
-                  <PerformanceChart/>
+                  <PerformanceChart data={performance}/>
                 </div>
 
                 <div className='bg-[#FBFBFB] h-[214px] xl:h-65 rounded-md relative'>
-                  <ScoreChart/>
+                  <ScoreChart score={user.score}/>
                 </div>
               </div>
 

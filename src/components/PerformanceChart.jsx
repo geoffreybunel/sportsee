@@ -1,14 +1,8 @@
-import data from '../data/data.json';
-import { useContext } from 'react';
-import { UserContext } from '../utils/UserContext';
-import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Tooltip } from 'recharts';
+import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis } from 'recharts';
 
-function PerformanceChart() {
-    const userId = useContext(UserContext);
-    const userPerformance = data.USER_PERFORMANCE.find(p => p.userId === userId);
-
+function PerformanceChart({ data }) {
     // Transforme l'objet en tableau exploitable par RadarChart
-    const kind = userPerformance.kind;
+    const kind = data.kind;
     const kindTranslation = {
         intensity: "Intensité",
         speed: "Vitesse",
@@ -18,7 +12,7 @@ function PerformanceChart() {
         cardio: "Cardio"
     };
 
-    const performanceData = userPerformance.data.map(d => {
+    const performanceData = data.data.map(d => {
         const subjectEn = kind[String(d.kind)];
         return {
           subject: kindTranslation[subjectEn] || subjectEn, // traduit ou garde l'original

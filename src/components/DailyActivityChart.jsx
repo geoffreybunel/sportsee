@@ -1,17 +1,12 @@
-import data from '../data/data.json';
-import { useContext } from 'react';
-import { UserContext } from '../utils/UserContext';
 import { BarChart, Bar, Text, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
-function DailyActivityChart() {
-    const userId = useContext(UserContext);
-    const userActivity = data.USER_ACTIVITY.find(activity => activity.userId === userId);
+function DailyActivityChart({ data}) {
 
     return (
         <BarChart
             style={{ width: '100%', maxWidth: '700px', maxHeight: '220px', aspectRatio: 1.618 }}
             responsive
-            data={userActivity.sessions}
+            data={data}
             margin={{
                 top: 5,
                 right: 0,

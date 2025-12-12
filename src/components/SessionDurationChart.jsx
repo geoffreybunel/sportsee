@@ -1,7 +1,4 @@
-import data from '../data/data.json';
 import { useEffect, useState } from "react";
-import { useContext } from 'react';
-import { UserContext } from '../utils/UserContext';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Text, Rectangle } from 'recharts';
 
 const CustomCursor = ({points, width}) => {
@@ -32,12 +29,10 @@ const CustomCursor = ({points, width}) => {
     );
 };
 
-function SessionDurationChart() {
-    const userId = useContext(UserContext);
-    const userAverageSessions = data.USER_AVERAGE_SESSIONS.find(sessions => sessions.userId === userId);
+function SessionDurationChart({ data }) {
     const extendedSessions = [
         { day: 0, sessionLength: 25 },
-        ...userAverageSessions.sessions,
+        ...data,
         { day: 8, sessionLength: 40 }
     ]
 
