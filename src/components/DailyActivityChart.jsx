@@ -6,16 +6,17 @@ function DailyActivityChart({ data}) {
         <BarChart
             style={{ width: '100%', maxWidth: '700px', maxHeight: '220px', aspectRatio: 1.618 }}
             responsive
-            data={data}
+            data={data} // Données passées au graphique
             margin={{
                 top: 5,
                 right: 0,
                 left: 0,
                 bottom: 5,
             }}
-            barGap={8}
+            barGap={8} // Espacement entre les barres
             className='mx-5'
         >
+            {/* Titre du graphique */}
             <Text
                 fill='#20253A'
                 fontSize={15}
@@ -23,15 +24,25 @@ function DailyActivityChart({ data}) {
                 textAnchor='start'
                 verticalAnchor='start'
             
-            >Activité quotidienne</Text>
-            <CartesianGrid strokeDasharray="3 3" vertical={false} width="auto" />
+            >
+                Activité quotidienne
+            </Text>
+
+            {/* Grille / fond du graphique */}
+            <CartesianGrid 
+                strokeDasharray="3 3" 
+                vertical={false} 
+                width="auto" 
+            />
+
             <XAxis 
-                dataKey={(entry) => new Date(entry.day).getDate()} 
-                tickLine={false} 
+                dataKey={(entry) => new Date(entry.day).getDate()} // Affiche uniquement le jour du mois
+                tickLine={false} // Désactive les lignes des ticks
                 tickMargin={15}
                 padding={{ left: -33, right: -34 }} 
                 // scale='point' 
             />
+
             <YAxis 
                 yAxisId="kilogram"
                 dataKey="kilogram" 
@@ -42,26 +53,20 @@ function DailyActivityChart({ data}) {
                 axisLine={false} 
                 tickLine={false}
             />
+
             <YAxis 
                 yAxisId="calories"
                 dataKey="calories" 
                 tickCount={3}
                 hide={true}
             />
+
+            {/* Tooltip pour afficher les détails au survol */}
             <Tooltip 
                 separator = ''
                 itemStyle = {{color: '#FFFFFF', fontSize: 7}}
                 contentStyle ={{backgroundColor: '#E60000', border: 'none'}}
                 labelStyle={{display: 'none'}}
-                // formatter={(value, name) => {
-                //     if (name === 'kilogram') {
-                //         return [`${value}kg`];
-                //     }
-                //     if (name === 'calories') {
-                //         return [`${value}kCal`];
-                //     }
-                //     return [value, name];
-                // }}
                 content={({ active, payload }) => {
                     if (active && payload && payload.length) {
                         return (
@@ -79,6 +84,8 @@ function DailyActivityChart({ data}) {
                     return null;
                 }}
             />
+
+            {/* Légende personnalisée */}
             <Legend
                 className='top-0'
                 verticalAlign="top"  
@@ -98,6 +105,7 @@ function DailyActivityChart({ data}) {
                     </ul>
                 )}
             />
+
             <Bar 
                 dataKey="kilogram" 
                 yAxisId="kilogram" 
@@ -105,6 +113,7 @@ function DailyActivityChart({ data}) {
                 barSize="7" 
                 radius={[10, 10, 0, 0]}
             />
+            
             <Bar 
                 dataKey="calories" 
                 fill="#E60000" 

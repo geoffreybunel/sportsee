@@ -16,12 +16,14 @@ function App() {
   const userID = Number(id);
   const validIds = [12, 18];
 
+  // États pour stocker les données utilisateur et l'état de chargement
   const [user, setUser] = useState(null);
   const [activity, setActivity] = useState([]);
   const [averageSessions, setAverageSessions] = useState([]);
   const [performance, setPerformance] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // Effet pour récupérer les données utilisateur lorsque l'ID change
   useEffect(() => {
     async function fetchData() {
       setLoading(true);
@@ -31,9 +33,9 @@ function App() {
       const userActivity = await getUserActivity(userID);
       const userAverageSessions = await getUserAverageSessions(userID);
       const userPerformance = await getUserPerformance(userID);
-
       // console.log('Données de performance récupérées :', userPerformance);
-      // Mise à jour des états
+
+      // Mise à jour des états avec les données récupérées
       setUser(userData);
       setActivity(userActivity);
       setAverageSessions(userAverageSessions);
@@ -42,15 +44,15 @@ function App() {
       setLoading(false);
     }
 
-    fetchData();
-  }, [userID]);
+    fetchData(); // Appelle la fonction pour récupérer les données
+  }, [userID]); // Dépendance sur l'ID utilisateur
 
-  // Si pas d'id OU id non valide OU user non trouvé
+  // Si aucun ID n'est fourni ou si l'ID n'est pas valide
   if (!id || !validIds.includes(userID)) {
     return <div>Aucun utilisateur sélectionné ou utilisateur inconnu</div>;
   }
 
-  // Affiche un message de chargement
+  // Affiche un message de chargement pendant la récupération des données
   if (loading) {
     return <div>Chargement des données...</div>;
   }
@@ -61,36 +63,45 @@ function App() {
   }
 
   return (
+    // Fournit l'ID utilisateur au contexte UserProvider
     <UserProvider userId={userID}>
       <div className='font-[Roboto] min-w-5xl'>
         <Header />
+
         <div className='flex min-w-5xl'>
           <Sidebar /> 
 
+          {/* Contenu principal */}
           <div className='w-full my-15 mx-[max(24px,min(100px,(100vw-1024px)/2))] flex flex-col gap-15'>
             <div>
               <Hero name={user.userInfos.firstName} />
             </div>
 
+            {/* Section des graphiques */}
             <div className='flex gap-2 max-h-[600px]'>
               <div className='w-[76%] grid grid-cols-3 gap-2'>
+                {/* Graphique d'activité quotidienne */}
                 <div className='bg-[#FBFBFB] col-span-3 flex justify-center items-center h-[270px] xl:h-80 rounded-md'>
                   <DailyActivityChart data={activity}/>
                 </div>
-
+                
+                {/* Graphique de durée moyenne des sessions */}
                 <div className='bg-[#FF0000] h-full xl:h-65 rounded-md relative'>
                   <SessionDurationChart data={averageSessions}/>
                 </div>
 
+                {/* Graphique de performance */}
                 <div className='bg-[#282D30] h-[214px] xl:h-65 rounded-md'>
                   <PerformanceChart data={performance}/>
                 </div>
 
+                {/* Graphique de score */}
                 <div className='bg-[#FBFBFB] h-[214px] xl:h-65 rounded-md relative'>
                   <ScoreChart score={user.score}/>
                 </div>
               </div>
 
+              {/* Section des cartes de nutriments */}
               <div className='w-[24%] h-full flex flex-col gap-2'>
                 <NutrientCard
                   icon="energy"

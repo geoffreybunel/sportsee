@@ -2,9 +2,9 @@
 import { RadialBarChart, RadialBar, Text, PolarAngleAxis } from 'recharts';
 
 function ScoreChart({ score }) {
-    // Prépare les données pour le PieChart
+    // Prépare les données pour le RadialBarChart
     const userScoreArray = [
-        { name: 'score', value: score, fill: '#FF0000' },
+        { name: 'score', value: score, fill: '#FF0000' }, // Segment rouge représentant le score
     ];
 
     return (
@@ -17,20 +17,20 @@ function ScoreChart({ score }) {
             <RadialBarChart
                 style={{ width: '100%', height: '100%', maxWidth: '500px', maxHeight: '100vh', aspectRatio: 1 }}
                 responsive
-                data={userScoreArray}
+                data={userScoreArray} // Données passées au graphique
                 innerRadius="60%"
                 outerRadius="70%"
                 startAngle={90}
                 endAngle={450}
             >
-
+                {/* Axe des angles (non visible) */}
                 <PolarAngleAxis
                     type="number"
                     domain={[0, 1]}
                     tick={false}
                 />
 
-                {/* Ajout d'un cercle blanc comme fond */}
+                {/* cercle blanc comme fond */}
                 <circle
                     cx="50%"
                     cy="50%"
@@ -38,6 +38,7 @@ function ScoreChart({ score }) {
                     fill="#FFFFFF"
                 />
 
+                {/* Texte titre du graphique */}
                 <Text
                     x={30}
                     y={20}
@@ -50,6 +51,7 @@ function ScoreChart({ score }) {
                     Score
                 </Text>
 
+                {/* Barre radiale représentant le score */}
                 <RadialBar 
                     dataKey="value" 
                     cornerRadius="50%" 
@@ -62,7 +64,7 @@ function ScoreChart({ score }) {
                 style={{
                     top: '48%',
                     left: '50%',
-                    transform: 'translate(-50%, -50%)',
+                    transform: 'translate(-50%, -50%)', // Centre la légende
                 }}
             >
                 <span className='text-[#282D30] text-[26px] font-bold'>{`${score * 100}%`}</span>
