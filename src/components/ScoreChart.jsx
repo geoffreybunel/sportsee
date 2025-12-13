@@ -8,13 +8,13 @@ function ScoreChart({ score }) {
 
     return (
         <div 
-            className='relative w-full max-w-[500px] my-0 mx-auto'
+            className='relative w-full max-w-[500px] max-h-[260px] my-0 mx-auto'
             style={{
                 aspectRatio: '1', // Maintient un carré
             }}
         >
             <RadialBarChart
-                style={{ width: '100%', height: '100%', maxWidth: '500px', maxHeight: '100vh', aspectRatio: 1 }}
+                style={{ width: '100%', height: '100%', maxWidth: '500px', maxHeight: '260px', aspectRatio: 1 }}
                 responsive
                 data={userScoreArray} // Données passées au graphique
                 innerRadius="60%"
@@ -29,13 +29,15 @@ function ScoreChart({ score }) {
                     tick={false}
                 />
 
-                {/* cercle blanc comme fond */}
-                <circle
-                    cx="50%"
-                    cy="50%"
-                    r="29.5%"
-                    fill="#FFFFFF"
-                />
+                {/* Cercle blanc comme fond */}
+                <g>
+                    <circle
+                        cx="50%" // Centre horizontal
+                        cy="50%" // Centre vertical
+                        r="28%" // Rayon proportionnel au conteneur
+                        fill="#FFFFFF" // Couleur blanche
+                    />
+                </g>
 
                 {/* Texte titre du graphique */}
                 <Text
@@ -59,12 +61,7 @@ function ScoreChart({ score }) {
 
             {/* Legend */}
             <div
-                className="absolute max-w-20 flex flex-col items-center justify-center"
-                style={{
-                    top: '48%',
-                    left: '50%',
-                    transform: 'translate(-50%, -50%)', // Centre la légende
-                }}
+                className="absolute inset-0 flex flex-col items-center justify-center max-w-20 mx-auto max-h-[260px]"
             >
                 <span className='text-[#282D30] text-[26px] font-bold'>{`${score * 100}%`}</span>
                 <span className='text-[#74798C] text-[16px] font-medium text-center'>de votre objectif</span>

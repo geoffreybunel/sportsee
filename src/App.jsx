@@ -66,10 +66,10 @@ function App() {
   return (
     // Fournit l'ID utilisateur au contexte UserProvider
     <UserProvider userId={userID}>
-      <div className='font-[Roboto] min-w-5xl min-h-195'>
+      <div className='font-[Roboto] min-w-5xl min-h-195 h-screen'>
         <Header />
 
-        <div className='flex'>
+        <div className='flex lg:h-auto 2xl:h-screen'>
           <Sidebar /> 
 
           {/* Contenu principal */}

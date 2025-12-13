@@ -4,7 +4,7 @@ function DailyActivityChart({ data }) {
 
     return (
         <BarChart
-            style={{ width: '100%', maxWidth: '700px', maxHeight: '220px', aspectRatio: 1.618 }}
+            style={{ width: '100%', maxWidth: '100vw', maxHeight: '220px', aspectRatio: 1.618 }}
             responsive
             data={data} // Données passées au graphique
             margin={{
