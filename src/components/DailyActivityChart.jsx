@@ -1,6 +1,6 @@
 import { BarChart, Bar, Text, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
-function DailyActivityChart({ data}) {
+function DailyActivityChart({ data }) {
 
     return (
         <BarChart

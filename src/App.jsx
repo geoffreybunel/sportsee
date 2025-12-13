@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { getUser, getUserActivity, getUserAverageSessions, getUserPerformance } from './services/userService';
 import { UserProvider } from './utils/UserProvider'
 import { useParams } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import Header from './components/Header'
 import Sidebar from './components/Sidebar'
 import Hero from './components/Hero'
@@ -142,5 +143,49 @@ function App() {
     </UserProvider>
   )
 }
+
+// PropTypes
+UserProvider.propTypes = {
+  userId: PropTypes.number.isRequired,
+  children: PropTypes.node.isRequired, // élément React ou un tableau d'éléments
+};
+
+Hero.propTypes = {
+  name: PropTypes.string.isRequired,
+};
+
+DailyActivityChart.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.shape({
+      day: PropTypes.number,
+      kilogram: PropTypes.number,
+      calories: PropTypes.number,
+  })), // tableau d'objets avec des propriétés spécifiques
+};
+
+SessionDurationChart.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.shape({
+    day: PropTypes.number,
+    sessionLength: PropTypes.number,
+  })),
+};
+
+PerformanceChart.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.shape({
+    kind: PropTypes.string,
+    value: PropTypes.number,
+  })),
+};
+
+ScoreChart.propTypes = {
+  score: PropTypes.number,
+};
+
+NutrientCard.propTypes = {
+  icon: PropTypes.string,
+  name: PropTypes.string,
+  color: PropTypes.string,
+  value: PropTypes.number,
+  unit: PropTypes.string,
+};
 
 export default App

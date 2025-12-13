@@ -1,4 +1,3 @@
-// import { Pie, PieChart, Text } from 'recharts';
 import { RadialBarChart, RadialBar, Text, PolarAngleAxis } from 'recharts';
 
 function ScoreChart({ score }) {
