@@ -65,14 +65,14 @@ function App() {
   return (
     // Fournit l'ID utilisateur au contexte UserProvider
     <UserProvider userId={userID}>
-      <div className='font-[Roboto] min-w-5xl'>
+      <div className='font-[Roboto] min-w-5xl min-h-195'>
         <Header />
 
-        <div className='flex min-w-5xl'>
+        <div className='flex'>
           <Sidebar /> 
 
           {/* Contenu principal */}
-          <div className='w-full my-15 mx-[max(24px,min(100px,(100vw-1024px)/2))] flex flex-col gap-15'>
+          <div className='w-full my-[max(26px,min(100px,(100vw-1024px)/2))] mx-[max(24px,min(100px,(100vw-1024px)/2))] flex flex-col gap-15'>
             <div>
               <Hero name={user.userInfos.firstName} />
             </div>
