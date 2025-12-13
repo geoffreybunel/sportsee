@@ -39,7 +39,7 @@ function DailyActivityChart({ data}) {
                 dataKey={(entry) => new Date(entry.day).getDate()} // Affiche uniquement le jour du mois
                 tickLine={false} // Désactive les lignes des ticks
                 tickMargin={15}
-                padding={{ left: -33, right: -34 }} 
+                padding={{ left: -32, right: -34 }} 
                 // scale='point' 
             />
 
