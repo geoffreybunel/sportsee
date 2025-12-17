@@ -95,7 +95,7 @@ Pour vérifier les versions installées, utilisez les commandes suivantes dans v
 Si vous travaillez avec plusieurs versions de NodeJS, nous vous recommandons d’installer nvm. Cet outil vous permettra de gérer facilement vos versions de NodeJS.
 
 2. Lancement du projet
-- Forkez le dépôt
+- Forkez le dépôt : https://github.com/geoffreybunel/SportSeeAPI
 - Clonez-le sur votre ordinateur
 - La commande yarn vous permettra d’installer les dépendances
 - La commande yarn dev vous permettra de lancer la micro-API
